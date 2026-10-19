@@ -46,7 +46,7 @@
   }
 
   /* ---------- المحتوى ---------- */
-  const CAT_LABEL = { motion: "svc.motion.t", edit: "svc.edit.t", social: "svc.social.t", ads: "svc.ads.t" };
+  const CAT_LABEL = { identity: "svc.identity.t", software: "svc.software.t", motion: "svc.motion.t", edit: "svc.edit.t", social: "svc.social.t", ads: "svc.ads.t" };
 
   function renderContent() {
     // الأعمال
@@ -178,11 +178,21 @@
 
   // الشيت بيستقبل أسماء عربي بدل الأكواد
   const SHEET_LABELS = {
-    services: { motion: "موشن جرافيك", edit: "مونتاج", social: "بوستات سوشيال ميديا", ads: "إعلانات ممولة", all: "كل ده مع بعض" },
+    services: { identity: "هوية بصرية", software: "موقع / تطبيق / سيستم", motion: "موشن جرافيك", edit: "مونتاج", social: "بوستات سوشيال ميديا", ads: "إعلانات ممولة", all: "كل ده مع بعض" },
     contact_pref: { whatsapp: "واتساب", telegram: "تليجرام", email: "إيميل", meet: "ميتنج Google Meet" }
   };
   function forSheet(d) {
     const out = { ...d };
+    // تفاصيل الهوية والسوفتوير بتتضاف لخانة التفاصيل (الشيت مفيهوش أعمدة ليهم)
+    const extra = [];
+    const ITEMS = { logo: "لوجو", full: "هوية بصرية كاملة", guide: "دليل الهوية", print: "مطبوعات وباكدجنج",
+      website: "ويب سايت", store: "متجر أونلاين", app: "تطبيق موبايل", system: "سيستم إدارة / لوحة تحكم" };
+    const names = (v) => (v || "").split(", ").filter(Boolean).map((x) => ITEMS[x] || x).join("، ");
+    if (out.identity_name || out.identity_items) extra.push(`هوية: ${[out.identity_name, names(out.identity_items)].filter(Boolean).join(" | ")}`);
+    if (out.software_type || out.software_design) extra.push(`سوفتوير: ${[names(out.software_type), out.software_design && "عنده تصميم جاهز"].filter(Boolean).join(" | ")}`);
+    if (extra.length) out.details = `${out.details}\n\n${extra.join("\n")}`;
+    ["identity_name", "identity_items", "software_type", "software_design"].forEach((k) => delete out[k]);
+
     for (const k in SHEET_LABELS) {
       if (out[k]) out[k] = out[k].split(", ").map((v) => SHEET_LABELS[k][v] || v).join("، ");
     }
@@ -193,7 +203,7 @@
   function summary(d) {
     const svcNames = (d.services || "").split(", ").map((s) => {
       if (s === "all") return t("form.svc.all");
-      return t({ motion: "svc.motion.t", edit: "svc.edit.t", social: "form.svc.social", ads: "form.svc.ads" }[s]);
+      return t({ identity: "form.svc.identity", software: "form.svc.software", motion: "svc.motion.t", edit: "svc.edit.t", social: "form.svc.social", ads: "form.svc.ads" }[s]);
     }).join(" + ");
     return [
       t("wa.order"),

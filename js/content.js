@@ -4,13 +4,15 @@
    ============================================================ */
 
 /* الأعمال
-   category: motion | edit | social | ads
+   category: identity | software | motion | edit | social | ads
    youtube:  ID الفيديو (الجزء اللي بعد v= في اللينك)
    vimeo:    رقم الفيديو على Vimeo
    image:    مسار صورة جوه فولدر assets/work/ (يفضل webp)
    link:     لينك خارجي (Behance مثلاً) لو مش فيديو
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 window.WORK = [
+  { category: "identity", ar: "هوية بصرية كاملة", en: "Full visual identity", client: "—" },
+  { category: "software", ar: "موقع لبراند", en: "Brand website", client: "—" },
   { category: "motion", ar: "فيديو إكسبلينر", en: "Explainer video", client: "—" },
   { category: "edit",   ar: "ريلز لبراند ملابس", en: "Fashion brand reels", client: "—" },
   { category: "social", ar: "هوية سوشيال لمطعم", en: "Restaurant social identity", client: "—" },
@@ -34,6 +36,10 @@ window.TOOLS = ["Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Fi
 window.TESTIMONIALS = [];
 
 window.FAQ = [
+  { ar: ["مين اللي بيشتغل على مشروعي؟", "أنا اللي بتابع معاك من أول يوم لحد التسليم، وبيشتغل معايا تيم متخصص في التصميم والتطوير والموشن والمحتوى. إنت بتتكلم معايا أنا بس."],
+    en: ["Who works on my project?", "I handle your project from day one to delivery, with a team specialised in design, development, motion and content. You only ever deal with me."] },
+  { ar: ["بتعملوا مواقع وتطبيقات كمان؟", "أيوه، بنعمل ويب سايت ومتاجر أونلاين وتطبيقات موبايل وسيستمات إدارة، وبتطلع بنفس هوية البراند."],
+    en: ["Do you build websites and apps too?", "Yes. We build websites, online stores, mobile apps and management systems, all in your brand identity."] },
   { ar: ["التسليم بياخد قد إيه؟", "حسب حجم الشغل. البوستات عادة من 2 لـ 4 أيام، والفيديوهات من 4 لـ 10 أيام. بحدد معاك المعاد بالظبط قبل ما نبدأ."],
     en: ["How long does delivery take?", "It depends on scope. Posts usually take 2–4 days and videos 4–10 days. We agree on the exact date before starting."] },
   { ar: ["كام مرة أقدر أعدّل؟", "كل مشروع فيه جولتين تعديل مجانًا، ولو محتاج أكتر بنتفق عليها."],

@@ -181,6 +181,8 @@ html[dir="rtl"] .hero__shape { inset: auto auto -18px -18px; }
 .section--dark { background: var(--navy-900); color: var(--white); }
 .section__head { max-width: 760px; margin-bottom: 44px; }
 .section__head h2 { font-size: clamp(30px, 5vw, 48px); }
+.section__sub { margin-top: 16px; font-size: 18px; color: var(--navy-700); max-width: 640px; }
+.section--dark .section__sub { color: var(--navy-200); }
 .kicker {
   font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em;
   color: var(--lemon-700); margin-bottom: 14px;
@@ -206,7 +208,7 @@ html[dir="rtl"] .hero__shape { inset: auto auto -18px -18px; }
 .service--full p { color: var(--navy-200); }
 @media (min-width: 640px) { .services { grid-template-columns: 1fr 1fr; } .service--full { grid-column: 1 / -1; } }
 @media (min-width: 1000px) {
-  .services { grid-template-columns: repeat(4, 1fr); }
+  .services { grid-template-columns: repeat(3, 1fr); }
   .service--full { flex-direction: row; align-items: center; padding: 36px; }
 }
 
@@ -237,6 +239,8 @@ html[dir="rtl"] .hero__shape { inset: auto auto -18px -18px; }
 .card__ph--motion { background: radial-gradient(circle at 30% 30%, var(--lemon-300), var(--lemon-100)); }
 .card__ph--edit   { background: radial-gradient(circle at 70% 30%, var(--navy-200), var(--light)); }
 .card__ph--social { background: radial-gradient(circle at 30% 70%, var(--red-100), var(--soft)); }
+.card__ph--identity { background: radial-gradient(circle at 70% 70%, var(--lemon-500), var(--lemon-100)); }
+.card__ph--software { background: linear-gradient(135deg, var(--navy-200), var(--soft)); }
 .card__ph--ads    { background: linear-gradient(135deg, var(--lemon-100), var(--cool)); }
 .card__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; }
 .card__meta h3 { font-size: 17px; font-weight: 600; }
@@ -350,6 +354,8 @@ html[dir="rtl"] .form select { background-position: 20px 50%, 15px 50%; }
 .cond { display: none; background: var(--lemon-100); border-radius: var(--radius-sm); padding: 18px 18px 6px; margin-bottom: 12px; }
 .cond.is-open { display: block; animation: condIn .4s var(--ease); }
 @keyframes condIn { from { opacity: 0; transform: translateY(-6px); } }
+.cond__label { font-size: 14px; font-weight: 500; color: var(--navy-700); margin-bottom: 8px; }
+.checks--sm .check span { height: 38px; font-size: 14px; padding-inline: 14px; background: var(--white); }
 .cond h4 { font-size: 15px; margin-bottom: 12px; color: var(--navy-900); }
 .cond input:not([type=checkbox]), .cond select { background-color: var(--white) !important; }
 
