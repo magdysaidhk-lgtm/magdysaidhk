@@ -50,20 +50,16 @@
 
   function renderContent() {
     // الأعمال
-    $("#workGrid").innerHTML = window.WORK.map((w, i) => {
-      const slides = slidesOf(w);
-      const first = slides[0];
-      const thumb = !first
-        ? `<div class="card__ph card__ph--${w.category}"><span>${lang === "ar" ? "قريباً" : "Coming soon"}</span></div>`
-        : `<img src="${first.type === "img" ? first.src : `https://i.ytimg.com/vi/${first.id}/hqdefault.jpg`}" alt="" loading="lazy">`;
-      const isVideo = first && first.type !== "img";
-      const unit = isVideo ? (lang === "ar" ? "فيديوهات" : "videos") : (lang === "ar" ? "تصميمات" : "designs");
+    // كل صورة/فيديو بيتعرض لوحده في الشبكة، ومعاه اسم المشروع
+    tiles = window.WORK.flatMap((w) => slidesOf(w).map((sl) => ({ ...sl, w })));
+    $("#workGrid").innerHTML = tiles.map((tl, i) => {
+      const thumb = tl.type === "img" ? tl.src : `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg`;
       return `
-        <article class="card" data-cat="${w.category}" data-i="${i}" ${slides.length || w.link ? 'tabindex="0" role="button"' : ""}>
-          <div class="card__media">${thumb}${isVideo ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${slides.length > 1 ? `<span class="card__count">${slides.length} ${unit}</span>` : ""}</div>
+        <article class="card" data-cat="${tl.w.category}" data-i="${i}" tabindex="0" role="button">
+          <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy">${tl.type !== "img" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}</div>
           <div class="card__meta">
-            <h3>${w[lang]}</h3>
-            <span class="tag">${t(CAT_LABEL[w.category])}</span>
+            <h3>${tl.w[lang]}</h3>
+            <span class="tag">${t(CAT_LABEL[tl.w.category])}</span>
           </div>
         </article>`;
     }).join("");
@@ -112,11 +108,13 @@
     ...(w.youtube ? [w.youtube] : []).concat(w.videos || []).map((id) => ({ type: "yt", id })),
     ...(w.shorts || []).map((id) => ({ type: "yt", id, vertical: true }))
   ];
-  let gallery = null; // { slides, at, title }
+  let gallery = null; // { slides, at }
+  let tiles = [];
 
   function showSlide() {
-    const { slides, at, title } = gallery;
+    const { slides, at } = gallery;
     const s = slides[at];
+    const title = s.w ? s.w[lang] : "";
     const rtl = document.documentElement.dir === "rtl";
     const nav = slides.length > 1
       ? `<button class="modal__nav modal__nav--prev" data-step="-1" aria-label="Previous">${rtl ? "›" : "‹"}</button>
@@ -136,11 +134,11 @@
     showSlide();
   }
 
+  // بيفتح المعرض على الشغلانة اللي اتداس عليها، والتقليب بيمشي على الشغل الظاهر في الفلتر الحالي
   function openWork(i) {
-    const w = window.WORK[i];
-    const slides = slidesOf(w);
-    if (!slides.length) { if (w.link) window.open(w.link, "_blank", "noopener"); return; }
-    gallery = { slides, at: 0, title: w[lang] };
+    const visible = $$("#workGrid .card:not([hidden])").map((c) => +c.dataset.i);
+    const slides = visible.map((k) => tiles[k]);
+    gallery = { slides, at: Math.max(0, visible.indexOf(i)), title: "" };
     showSlide();
     modal.hidden = false;
     document.body.style.overflow = "hidden";
