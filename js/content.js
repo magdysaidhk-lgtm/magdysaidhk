@@ -5,22 +5,29 @@
 
 /* الأعمال
    category: identity | software | motion | edit | social | ads
-   youtube:  ID الفيديو (الجزء اللي بعد v= في اللينك)
+   youtube:  ID الفيديو (الجزء اللي بعد v= أو youtu.be/ في اللينك)
+   videos:   أكتر من فيديو عرضي ["id1", "id2"]
+   shorts:   فيديوهات طولية (YouTube Shorts) ["id1", "id2"]
    vimeo:    رقم الفيديو على Vimeo
    image:    مسار صورة جوه فولدر assets/work/ (يفضل webp)
    images:   أكتر من صورة لنفس المشروع ["assets/work/a.webp", "assets/work/b.webp"] (بتتفتح كمعرض)
    link:     لينك خارجي (Behance مثلاً) لو مش فيديو
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 window.WORK = [
-  { category: "identity", ar: "هوية بصرية كاملة", en: "Full visual identity", client: "—" },
-  { category: "software", ar: "موقع لبراند", en: "Brand website", client: "—" },
-  { category: "motion", ar: "فيديو إكسبلينر", en: "Explainer video", client: "—" },
-  { category: "edit",   ar: "ريلز لبراند ملابس", en: "Fashion brand reels", client: "—" },
+  { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
+    videos: ["p3wM3pk72Lc", "NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
+  { category: "edit", ar: "ريلز ومونتاج", en: "Reels & Editing",
+    shorts: ["iCIRqQOEMnU", "fOY4nkztST4", "GEpZlji3_xU"] },
   { category: "social", ar: "بوستات طبية", en: "Medical Posts", client: "د/ محمود سيد عبد العال",
     images: ["assets/work/ent-tonsils.webp", "assets/work/ent-cold.webp"] },
-  { category: "ads",    ar: "حملة إعلانية لمتجر أونلاين", en: "E-commerce ad campaign", client: "—" },
-  { category: "motion", ar: "لوجو أنيميشن", en: "Logo animation", client: "—" },
-  { category: "social", ar: "كاروسيل تعليمي", en: "Educational carousel", client: "—" }
+  { category: "social", ar: "Bridges Academy", en: "Bridges Academy",
+    images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/work/bridges-${n}.webp`) },
+  { category: "social", ar: "تطبيق لازم", en: "Lazem App",
+    images: [1, 2, 3, 4].map((n) => `assets/work/lazem-${n}.webp`) },
+  { category: "social", ar: "هايبر المزاد", en: "Hyper Al-Mazad",
+    images: [1, 2, 3, 4].map((n) => `assets/work/mazad-${n}.webp`) },
+  { category: "social", ar: "Tawasul", en: "Tawasul",
+    images: ["assets/work/tawasul-1.webp", "assets/work/tawasul-2.webp"] }
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

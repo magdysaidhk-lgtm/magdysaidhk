@@ -51,22 +51,26 @@
   function renderContent() {
     // الأعمال
     $("#workGrid").innerHTML = window.WORK.map((w, i) => {
-      const imgs = imagesOf(w);
-      const thumb = imgs.length
-        ? `<img src="${imgs[0]}" alt="" loading="lazy">`
-        : w.youtube
-          ? `<img src="https://i.ytimg.com/vi/${w.youtube}/hqdefault.jpg" alt="" loading="lazy">`
-          : `<div class="card__ph card__ph--${w.category}"><span>${lang === "ar" ? "قريباً" : "Coming soon"}</span></div>`;
-      const playable = w.youtube || w.vimeo;
+      const slides = slidesOf(w);
+      const first = slides[0];
+      const thumb = !first
+        ? `<div class="card__ph card__ph--${w.category}"><span>${lang === "ar" ? "قريباً" : "Coming soon"}</span></div>`
+        : `<img src="${first.type === "img" ? first.src : `https://i.ytimg.com/vi/${first.id}/hqdefault.jpg`}" alt="" loading="lazy">`;
+      const isVideo = first && first.type !== "img";
+      const unit = isVideo ? (lang === "ar" ? "فيديوهات" : "videos") : (lang === "ar" ? "تصميمات" : "designs");
       return `
-        <article class="card" data-cat="${w.category}" data-i="${i}" ${playable || w.link || imgs.length ? 'tabindex="0" role="button"' : ""}>
-          <div class="card__media">${thumb}${playable ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${imgs.length > 1 ? `<span class="card__count">${imgs.length} ${lang === "ar" ? "تصميمات" : "designs"}</span>` : ""}</div>
+        <article class="card" data-cat="${w.category}" data-i="${i}" ${slides.length || w.link ? 'tabindex="0" role="button"' : ""}>
+          <div class="card__media">${thumb}${isVideo ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${slides.length > 1 ? `<span class="card__count">${slides.length} ${unit}</span>` : ""}</div>
           <div class="card__meta">
             <h3>${w[lang]}</h3>
             <span class="tag">${t(CAT_LABEL[w.category])}</span>
           </div>
         </article>`;
     }).join("");
+    // إخفاء الفلاتر اللي مفيهاش شغل
+    $$("#filters .chip").forEach((c) => {
+      c.hidden = c.dataset.filter !== "all" && !window.WORK.some((w) => w.category === c.dataset.filter);
+    });
     applyFilter();
 
     // الخبرات
@@ -100,49 +104,50 @@
     applyFilter();
   });
 
-  /* ---------- مودال الفيديو ---------- */
+  /* ---------- المعرض (صور وفيديوهات) ---------- */
   const modal = $("#modal");
-  const imagesOf = (w) => w.images || (w.image ? [w.image] : []);
-  let gallery = null; // { imgs, at, title }
+  // كل مشروع بيتحول لقايمة شرائح: صورة أو فيديو YouTube (shorts بتتعرض طولي)
+  const slidesOf = (w) => [
+    ...(w.images || (w.image ? [w.image] : [])).map((src) => ({ type: "img", src })),
+    ...(w.youtube ? [w.youtube] : []).concat(w.videos || []).map((id) => ({ type: "yt", id })),
+    ...(w.shorts || []).map((id) => ({ type: "yt", id, vertical: true }))
+  ];
+  let gallery = null; // { slides, at, title }
 
   function showSlide() {
-    const { imgs, at, title } = gallery;
+    const { slides, at, title } = gallery;
+    const s = slides[at];
     const rtl = document.documentElement.dir === "rtl";
-    const nav = imgs.length > 1
+    const nav = slides.length > 1
       ? `<button class="modal__nav modal__nav--prev" data-step="-1" aria-label="Previous">${rtl ? "›" : "‹"}</button>
          <button class="modal__nav modal__nav--next" data-step="1" aria-label="Next">${rtl ? "‹" : "›"}</button>
-         <span class="modal__counter" dir="ltr">${at + 1} / ${imgs.length}</span>`
+         <span class="modal__counter" dir="ltr">${at + 1} / ${slides.length}</span>`
       : "";
-    $("#modalBody").innerHTML = `<img src="${imgs[at]}" alt="${title}">${nav}`;
+    modal.classList.toggle("modal--image", s.type === "img");
+    modal.classList.toggle("modal--vertical", !!s.vertical);
+    const media = s.type === "img"
+      ? `<img src="${s.src}" alt="${title}">`
+      : `<iframe src="https://www.youtube-nocookie.com/embed/${s.id}?autoplay=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    $("#modalBody").innerHTML = media + nav;
   }
   function stepSlide(d) {
     if (!gallery) return;
-    gallery.at = (gallery.at + d + gallery.imgs.length) % gallery.imgs.length;
+    gallery.at = (gallery.at + d + gallery.slides.length) % gallery.slides.length;
     showSlide();
   }
 
   function openWork(i) {
     const w = window.WORK[i];
-    if (w.link && !w.youtube && !w.vimeo) { window.open(w.link, "_blank", "noopener"); return; }
-    if (imagesOf(w).length && !w.youtube && !w.vimeo) {
-      gallery = { imgs: imagesOf(w), at: 0, title: w[lang] };
-      showSlide();
-      modal.classList.add("modal--image");
-      modal.hidden = false;
-      document.body.style.overflow = "hidden";
-      return;
-    }
-    const src = w.youtube
-      ? `https://www.youtube-nocookie.com/embed/${w.youtube}?autoplay=1&rel=0`
-      : w.vimeo ? `https://player.vimeo.com/video/${w.vimeo}?autoplay=1` : null;
-    if (!src) return;
-    $("#modalBody").innerHTML = `<iframe src="${src}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    const slides = slidesOf(w);
+    if (!slides.length) { if (w.link) window.open(w.link, "_blank", "noopener"); return; }
+    gallery = { slides, at: 0, title: w[lang] };
+    showSlide();
     modal.hidden = false;
     document.body.style.overflow = "hidden";
   }
   function closeModal() {
     modal.hidden = true;
-    modal.classList.remove("modal--image");
+    modal.classList.remove("modal--image", "modal--vertical");
     gallery = null;
     $("#modalBody").innerHTML = "";
     document.body.style.overflow = "";
