@@ -12,7 +12,7 @@ window.SITE_CONFIG = {
 
   // لينك Google Apps Script بعد ما تعمله Deploy (شوف README)
   // لو فاضي: الطلب بيتبعت على واتساب مباشرة كبديل
-  sheetEndpoint: "",
+  sheetEndpoint: "https://script.google.com/macros/s/AKfycbz0TZ1eTQYnzEvzZslDwV8Z3mRrd7KyTf-MJDzXBimex_IWY1Amkt6pUN2xsRhZSOiU/exec",
 
   socials: [
     { name: "Instagram", url: "https://www.instagram.com/magdysaidhk" },
