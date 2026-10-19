@@ -28,7 +28,7 @@ function doPost(e) {
   const row = COLUMNS.map(function (c) {
     if (c === "timestamp") return new Date();
     if (c === "status") return "جديد";
-    return p[c] || "";
+    return asText(p[c] || "");
   });
   sheet.appendRow(row);
 
@@ -55,6 +55,11 @@ function doPost(e) {
   }
 
   return json({ ok: true });
+}
+
+// يخلي القيم اللي بتبدأ بـ + أو = تتحفظ كنص (رقم الموبايل يفضل زي ما هو، ومحدش يقدر يحط formula)
+function asText(v) {
+  return /^[=+\-@]/.test(v) ? "'" + v : v;
 }
 
 function getSheet() {
