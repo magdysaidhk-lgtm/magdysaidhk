@@ -8,6 +8,7 @@
    youtube:  ID الفيديو (الجزء اللي بعد v= في اللينك)
    vimeo:    رقم الفيديو على Vimeo
    image:    مسار صورة جوه فولدر assets/work/ (يفضل webp)
+   images:   أكتر من صورة لنفس المشروع ["assets/work/a.webp", "assets/work/b.webp"] (بتتفتح كمعرض)
    link:     لينك خارجي (Behance مثلاً) لو مش فيديو
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 window.WORK = [
@@ -15,10 +16,11 @@ window.WORK = [
   { category: "software", ar: "موقع لبراند", en: "Brand website", client: "—" },
   { category: "motion", ar: "فيديو إكسبلينر", en: "Explainer video", client: "—" },
   { category: "edit",   ar: "ريلز لبراند ملابس", en: "Fashion brand reels", client: "—" },
-  { category: "social", ar: "بوستات عيادة أنف وأذن", en: "ENT clinic social posts", client: "د/ محمود سيد عبد العال", image: "assets/work/ent-tonsils.webp" },
+  { category: "social", ar: "بوستات طبية", en: "Medical Posts", client: "د/ محمود سيد عبد العال",
+    images: ["assets/work/ent-tonsils.webp", "assets/work/ent-cold.webp"] },
   { category: "ads",    ar: "حملة إعلانية لمتجر أونلاين", en: "E-commerce ad campaign", client: "—" },
   { category: "motion", ar: "لوجو أنيميشن", en: "Logo animation", client: "—" },
-  { category: "social", ar: "حملة نزلات البرد", en: "Cold season campaign", client: "د/ محمود سيد عبد العال", image: "assets/work/ent-cold.webp" }
+  { category: "social", ar: "كاروسيل تعليمي", en: "Educational carousel", client: "—" }
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

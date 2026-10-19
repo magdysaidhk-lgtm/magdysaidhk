@@ -51,15 +51,16 @@
   function renderContent() {
     // الأعمال
     $("#workGrid").innerHTML = window.WORK.map((w, i) => {
-      const thumb = w.image
-        ? `<img src="${w.image}" alt="" loading="lazy">`
+      const imgs = imagesOf(w);
+      const thumb = imgs.length
+        ? `<img src="${imgs[0]}" alt="" loading="lazy">`
         : w.youtube
           ? `<img src="https://i.ytimg.com/vi/${w.youtube}/hqdefault.jpg" alt="" loading="lazy">`
           : `<div class="card__ph card__ph--${w.category}"><span>${lang === "ar" ? "قريباً" : "Coming soon"}</span></div>`;
       const playable = w.youtube || w.vimeo;
       return `
-        <article class="card" data-cat="${w.category}" data-i="${i}" ${playable || w.link || w.image ? 'tabindex="0" role="button"' : ""}>
-          <div class="card__media">${thumb}${playable ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}</div>
+        <article class="card" data-cat="${w.category}" data-i="${i}" ${playable || w.link || imgs.length ? 'tabindex="0" role="button"' : ""}>
+          <div class="card__media">${thumb}${playable ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${imgs.length > 1 ? `<span class="card__count">${imgs.length} ${lang === "ar" ? "تصميمات" : "designs"}</span>` : ""}</div>
           <div class="card__meta">
             <h3>${w[lang]}</h3>
             <span class="tag">${t(CAT_LABEL[w.category])}</span>
@@ -101,11 +102,31 @@
 
   /* ---------- مودال الفيديو ---------- */
   const modal = $("#modal");
+  const imagesOf = (w) => w.images || (w.image ? [w.image] : []);
+  let gallery = null; // { imgs, at, title }
+
+  function showSlide() {
+    const { imgs, at, title } = gallery;
+    const rtl = document.documentElement.dir === "rtl";
+    const nav = imgs.length > 1
+      ? `<button class="modal__nav modal__nav--prev" data-step="-1" aria-label="Previous">${rtl ? "›" : "‹"}</button>
+         <button class="modal__nav modal__nav--next" data-step="1" aria-label="Next">${rtl ? "‹" : "›"}</button>
+         <span class="modal__counter" dir="ltr">${at + 1} / ${imgs.length}</span>`
+      : "";
+    $("#modalBody").innerHTML = `<img src="${imgs[at]}" alt="${title}">${nav}`;
+  }
+  function stepSlide(d) {
+    if (!gallery) return;
+    gallery.at = (gallery.at + d + gallery.imgs.length) % gallery.imgs.length;
+    showSlide();
+  }
+
   function openWork(i) {
     const w = window.WORK[i];
     if (w.link && !w.youtube && !w.vimeo) { window.open(w.link, "_blank", "noopener"); return; }
-    if (w.image && !w.youtube && !w.vimeo) {
-      $("#modalBody").innerHTML = `<img src="${w.image}" alt="${w[lang]}">`;
+    if (imagesOf(w).length && !w.youtube && !w.vimeo) {
+      gallery = { imgs: imagesOf(w), at: 0, title: w[lang] };
+      showSlide();
       modal.classList.add("modal--image");
       modal.hidden = false;
       document.body.style.overflow = "hidden";
@@ -122,6 +143,7 @@
   function closeModal() {
     modal.hidden = true;
     modal.classList.remove("modal--image");
+    gallery = null;
     $("#modalBody").innerHTML = "";
     document.body.style.overflow = "";
   }
@@ -135,7 +157,18 @@
   });
   $("#modalClose").addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+  document.addEventListener("keydown", (e) => {
+    if (modal.hidden) return;
+    if (e.key === "Escape") closeModal();
+    // في العربي السهم الشمال = التالي
+    const rtl = document.documentElement.dir === "rtl";
+    if (e.key === "ArrowRight") stepSlide(rtl ? -1 : 1);
+    if (e.key === "ArrowLeft") stepSlide(rtl ? 1 : -1);
+  });
+  $("#modalBody").addEventListener("click", (e) => {
+    const b = e.target.closest(".modal__nav");
+    if (b) stepSlide(+b.dataset.step);
+  });
 
   /* ---------- المنيو ---------- */
   const menuBtn = $("#menuToggle");
