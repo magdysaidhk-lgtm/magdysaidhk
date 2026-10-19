@@ -15,10 +15,10 @@ window.WORK = [
   { category: "software", ar: "موقع لبراند", en: "Brand website", client: "—" },
   { category: "motion", ar: "فيديو إكسبلينر", en: "Explainer video", client: "—" },
   { category: "edit",   ar: "ريلز لبراند ملابس", en: "Fashion brand reels", client: "—" },
-  { category: "social", ar: "هوية سوشيال لمطعم", en: "Restaurant social identity", client: "—" },
+  { category: "social", ar: "بوستات عيادة أنف وأذن", en: "ENT clinic social posts", client: "د/ محمود سيد عبد العال", image: "assets/work/ent-tonsils.webp" },
   { category: "ads",    ar: "حملة إعلانية لمتجر أونلاين", en: "E-commerce ad campaign", client: "—" },
   { category: "motion", ar: "لوجو أنيميشن", en: "Logo animation", client: "—" },
-  { category: "social", ar: "كاروسيل تعليمي", en: "Educational carousel", client: "—" }
+  { category: "social", ar: "حملة نزلات البرد", en: "Cold season campaign", client: "د/ محمود سيد عبد العال", image: "assets/work/ent-cold.webp" }
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

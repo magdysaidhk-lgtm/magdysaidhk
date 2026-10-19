@@ -58,7 +58,7 @@
           : `<div class="card__ph card__ph--${w.category}"><span>${lang === "ar" ? "قريباً" : "Coming soon"}</span></div>`;
       const playable = w.youtube || w.vimeo;
       return `
-        <article class="card" data-cat="${w.category}" data-i="${i}" ${playable || w.link ? 'tabindex="0" role="button"' : ""}>
+        <article class="card" data-cat="${w.category}" data-i="${i}" ${playable || w.link || w.image ? 'tabindex="0" role="button"' : ""}>
           <div class="card__media">${thumb}${playable ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}</div>
           <div class="card__meta">
             <h3>${w[lang]}</h3>
@@ -104,6 +104,13 @@
   function openWork(i) {
     const w = window.WORK[i];
     if (w.link && !w.youtube && !w.vimeo) { window.open(w.link, "_blank", "noopener"); return; }
+    if (w.image && !w.youtube && !w.vimeo) {
+      $("#modalBody").innerHTML = `<img src="${w.image}" alt="${w[lang]}">`;
+      modal.classList.add("modal--image");
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+      return;
+    }
     const src = w.youtube
       ? `https://www.youtube-nocookie.com/embed/${w.youtube}?autoplay=1&rel=0`
       : w.vimeo ? `https://player.vimeo.com/video/${w.vimeo}?autoplay=1` : null;
@@ -114,6 +121,7 @@
   }
   function closeModal() {
     modal.hidden = true;
+    modal.classList.remove("modal--image");
     $("#modalBody").innerHTML = "";
     document.body.style.overflow = "";
   }
