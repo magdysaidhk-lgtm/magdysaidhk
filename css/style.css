@@ -100,6 +100,10 @@ p { margin: 0; }
 .nav a { color: var(--navy-700); transition: color .2s; }
 .nav a:hover { color: var(--navy-950); }
 .header__actions { display: flex; align-items: center; gap: 8px; }
+/* زرار اللغة والأزرار جنبه ثابتين في نفس المكان في اللغتين */
+.header__actions { direction: rtl; }
+html[dir="ltr"] .header__actions { order: -1; }
+html[dir="ltr"] .logo { order: 1; }
 .header__actions .btn { display: none; }
 .lang-toggle {
   height: 42px; min-width: 42px; padding-inline: 12px; border-radius: 999px;
@@ -368,7 +372,7 @@ html[dir="rtl"] .form select { background-position: 20px 50%, 15px 50%; }
 
 /* ---------- WhatsApp float ---------- */
 .wa-float {
-  position: fixed; bottom: 18px; inset-inline-end: 18px; z-index: 60;
+  position: fixed; bottom: 18px; left: 18px; z-index: 60; /* ثابت شمال في اللغتين */
   width: 58px; height: 58px; border-radius: 50%; background: #25D366;
   display: grid; place-content: center; box-shadow: 0 12px 28px -8px rgba(0,0,0,.35);
   transition: transform .3s var(--ease);
