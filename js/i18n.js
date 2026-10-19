@@ -11,7 +11,7 @@ window.I18N_EN = {
   "nav.cta": "Start a project",
 
   "hero.eyebrow": "Available for new projects",
-  "hero.title": "Your whole brand, from the <mark>name</mark> to the app.",
+  "hero.title": "Design that gives your brand an <mark>unforgettable</mark> presence.",
   "hero.sub": "I'm Magdy Said, and I lead a team of designers and developers. We build your brand from scratch: the name, logo and visual identity, through to your website, app and internal systems, plus content, motion and ads. Design and software in one place, and you work with me directly.",
   "hero.cta1": "Start a project",
   "hero.cta2": "See the work",
