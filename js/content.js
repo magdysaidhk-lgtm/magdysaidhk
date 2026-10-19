@@ -15,7 +15,7 @@
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 window.WORK = [
   { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
-    videos: ["p3wM3pk72Lc", "NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
+    videos: ["NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
   { category: "edit", ar: "ريلز ومونتاج", en: "Reels & Editing",
     shorts: ["iCIRqQOEMnU", "fOY4nkztST4", "GEpZlji3_xU"] },
   { category: "social", ar: "إدارة سوشيال ميديا", en: "Social Media Management",
@@ -30,6 +30,18 @@ window.WORK = [
   { category: "social", ar: "أكاديمية", en: "Academy",
     images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/work/bridges-${n}.webp`) }
 
+];
+
+/* الترتيب: الشغل ده بيظهر الأول بالترتيب ده (ID الفيديو أو مسار الصورة)، وبعده باقي الشغل */
+window.WORK_ORDER = [
+  "GEpZlji3_xU",
+  "iCIRqQOEMnU",
+  "assets/work/tawasul-2.webp",
+  "E1t4RZC1Ub4",
+  "assets/work/lazem-3.webp",
+  "assets/work/lazem-2.webp",
+  "assets/work/lazem-4.webp",
+  "assets/work/ent-cold.webp"
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

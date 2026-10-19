@@ -52,6 +52,9 @@
     // الأعمال
     // كل صورة/فيديو بيتعرض لوحده في الشبكة، ومعاه اسم المشروع
     tiles = window.WORK.flatMap((w) => slidesOf(w).map((sl) => ({ ...sl, w })));
+    const order = window.WORK_ORDER || [];
+    const rank = (tl) => { const r = order.indexOf(tl.src || tl.id); return r < 0 ? order.length : r; };
+    tiles = tiles.map((tl, k) => [tl, k]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(([tl]) => tl);
     $("#workGrid").innerHTML = tiles.map((tl, i) => {
       const thumb = tl.type === "img" ? tl.src : `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg`;
       return `
