@@ -28,6 +28,7 @@ function doPost(e) {
   const row = COLUMNS.map(function (c) {
     if (c === "timestamp") return new Date();
     if (c === "status") return "جديد";
+    if (c === "phone" && p.phone) return "'" + p.phone; // يحافظ على الصفر و +
     return asText(p[c] || "");
   });
   sheet.appendRow(row);
