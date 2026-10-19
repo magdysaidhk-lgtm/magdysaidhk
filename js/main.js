@@ -176,6 +176,20 @@
     return data;
   }
 
+  // الشيت بيستقبل أسماء عربي بدل الأكواد
+  const SHEET_LABELS = {
+    services: { motion: "موشن جرافيك", edit: "مونتاج", social: "بوستات سوشيال ميديا", ads: "إعلانات ممولة", all: "كل ده مع بعض" },
+    contact_pref: { whatsapp: "واتساب", telegram: "تليجرام", email: "إيميل", meet: "ميتنج Google Meet" }
+  };
+  function forSheet(d) {
+    const out = { ...d };
+    for (const k in SHEET_LABELS) {
+      if (out[k]) out[k] = out[k].split(", ").map((v) => SHEET_LABELS[k][v] || v).join("، ");
+    }
+    ["motion_script", "edit_footage", "social_identity", "ads_first"].forEach((k) => { if (out[k] === "yes") out[k] = "نعم"; });
+    return out;
+  }
+
   function summary(d) {
     const svcNames = (d.services || "").split(", ").map((s) => {
       if (s === "all") return t("form.svc.all");
@@ -216,7 +230,7 @@
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(data).toString()
+          body: new URLSearchParams(forSheet(data)).toString()
         });
       }
       $("#okWa").href = waUrl(summary(data));
