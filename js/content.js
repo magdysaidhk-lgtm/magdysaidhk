@@ -22,12 +22,12 @@ window.WORK = [
     images: ["assets/work/ent-tonsils.webp", "assets/work/ent-cold.webp"] },
   { category: "social", ar: "Bridges Academy", en: "Bridges Academy",
     images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/work/bridges-${n}.webp`) },
-  { category: "social", ar: "تطبيق لازم", en: "Lazem App",
-    images: [1, 2, 3, 4].map((n) => `assets/work/lazem-${n}.webp`) },
-  { category: "social", ar: "هايبر المزاد", en: "Hyper Al-Mazad",
-    images: [1, 2, 3, 4].map((n) => `assets/work/mazad-${n}.webp`) },
-  { category: "social", ar: "Tawasul", en: "Tawasul",
-    images: ["assets/work/tawasul-1.webp", "assets/work/tawasul-2.webp"] }
+  { category: "social", ar: "إدارة سوشيال ميديا", en: "Social Media Management",
+    images: [
+      ...[1, 2, 3, 4].map((n) => `assets/work/mazad-${n}.webp`),
+      ...[1, 2, 3, 4].map((n) => `assets/work/lazem-${n}.webp`),
+      "assets/work/tawasul-1.webp", "assets/work/tawasul-2.webp"
+    ] }
 ];
 
 /* الخبرات — عدّل السنين والأماكن */
