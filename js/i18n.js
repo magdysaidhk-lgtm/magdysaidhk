@@ -19,7 +19,7 @@ window.I18N_EN = {
 
   "svc.kicker": "Services",
   "svc.title": "Everything your brand needs, in one place.",
-  "svc.sub": "I'm your single point of contact from day one to delivery, backed by a team that covers every part: design, development, motion and content.",
+  "svc.sub": "One single point of contact from day one to delivery, with a specialised team for every part: visual identity, motion graphics, social media content and management, media buying, and finally your own website.",
   "svc.identity.t": "Brand Identity",
   "svc.identity.d": "From the brand name and logo to colors, typography and a brand guide, so your brand looks the same everywhere.",
   "svc.software.t": "Websites & Apps",
