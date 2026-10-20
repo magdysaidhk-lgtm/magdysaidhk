@@ -18,6 +18,13 @@ window.I18N_EN = {
   "hero.role": "Founder & Creative Director",
 
   "svc.kicker": "Services",
+  "svc.more": "Details & work",
+  "svc.d.includes": "What's included",
+  "svc.d.deliver": "What you get",
+  "svc.d.time": "Timeline",
+  "svc.d.work": "From our work",
+  "svc.d.nowork": "Work samples for this service are coming soon.",
+  "svc.d.cta": "Request this service",
   "svc.title": "Everything your brand needs, in one place.",
   "svc.sub": "One single point of contact from day one to delivery, with a specialised team for every part: visual identity, motion graphics, social media content and management, media buying, and finally your own website.",
   "svc.identity.t": "Brand Identity",
@@ -159,6 +166,12 @@ window.I18N_EN = {
 
 /* نصوص عربي بيستخدمها الجافاسكريبت */
 window.I18N_AR_JS = {
+  "svc.d.includes": "الخدمة بتشمل",
+  "svc.d.deliver": "هتستلم إيه",
+  "svc.d.time": "المدة التقريبية",
+  "svc.d.work": "من أعمالنا",
+  "svc.d.nowork": "نماذج من أعمال الخدمة دي هتتضاف قريبًا.",
+  "svc.d.cta": "اطلب الخدمة دي",
   "test.soon": "آراء العملاء قريباً.",
   "test.soon.d": "اشتغلت معايا قبل كده؟ يسعدني أسمع رأيك.",
   "form.sending": "جاري الإرسال…",

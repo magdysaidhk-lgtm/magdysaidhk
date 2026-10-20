@@ -26,12 +26,16 @@ function brandBoards(key, mockAr, mockEn) {
 
 window.WORK = [
   { category: "identity", caseStudy: true, ar: "أكاديمية النور", en: "Al Noor Academy",
+    about: { ar: "صممنا لوجو وهوية لأكاديمية تعليمية بالأزرق الداكن والذهبي، الكتاب المفتوح والشمس والطالب بيعبروا عن العلم والنور.", en: "We designed the logo and identity for an educational academy in deep blue and gold: the open book, the sun and the student stand for knowledge and light." },
     colors: ["#1A4056", "#DCA227"], images: brandBoards("alnoor", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
   { category: "identity", caseStudy: true, ar: "أكاديمية Bridges", en: "Bridges Academy",
+    about: { ar: "صممنا لوجو وهوية لأكاديمية تعليم القرآن بالأخضر والبرتقالي، وطبقناها على محتوى السوشيال ميديا بتاعهم.", en: "We designed the logo and identity for a Quran academy in green and orange, then applied it across their social media content." },
     colors: ["#004F2B", "#FE5119"], images: brandBoards("bridges", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
   { category: "identity", caseStudy: true, ar: "SA7AB", en: "SA7AB",
+    about: { ar: "لوجو بسيط وحديث بالكحلي واللبني، يتقري بسهولة على أي خلفية.", en: "A simple, modern logo in navy and light blue that reads clearly on any background." },
     colors: ["#161B45", "#D4F5FF"], images: brandBoards("sa7ab", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
   { category: "identity", caseStudy: true, ar: "المتحدة ستيل", en: "United Steel",
+    about: { ar: "لوجو لشركة حديد تسليح وأسمنت ومواد بناء، بطابع صناعي قوي يناسب مواقع العمل.", en: "A logo for a rebar, cement and building materials company, with a strong industrial look that suits work sites." },
     colors: ["#000000", "#065F73", "#303030"], images: brandBoards("unitedsteel", "اللوجو في موقع العمل", "Logo on site") },
   { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
     videos: ["NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
@@ -102,3 +106,93 @@ window.FAQ = [
   { ar: ["معنديش هوية بصرية، أعمل إيه؟", "مفيش مشكلة، نقدر نبدأ بهوية بسيطة (لوجو وألوان وخطوط) قبل المحتوى."],
     en: ["I don't have a visual identity yet. What now?", "No problem. We can start with a simple identity (logo, colors, fonts) before the content."] }
 ];
+
+/* تفاصيل الخدمات: بتظهر لما العميل يدوس على كارت الخدمة
+   intro: مقدمة، items: الخدمة بتشمل إيه، deliver: هتستلم إيه، time: المدة التقريبية
+   الأعمال اللي بتظهر تحت كل خدمة بتتجاب لوحدها من WORK حسب الـ category */
+window.SERVICES = {
+  identity: {
+    ar: {
+      intro: "نبني لعلامتك التجارية شخصية بصرية واضحة ومتسقة، تبدأ من الاسم واللوجو وتمتد لكل مكان يشوف فيه العميل البراند بتاعك.",
+      items: ["اختيار اسم البراند لو لسه محتاج اسم", "تصميم اللوجو بكل نسخه: الأساسي، والأيقونة، والأبيض والأسود", "بالتة الألوان والخطوط الرسمية", "دليل استخدام الهوية (Brand Guidelines)", "تطبيقات الهوية: كروت، أوراق رسمية، يافطات، باكدجنج، وقوالب سوشيال ميديا"],
+      deliver: "ملفات مفتوحة وجاهزة للطباعة والديجيتال: AI، PDF، PNG، SVG.",
+      time: "من أسبوعين لـ 4 أسابيع حسب حجم الهوية."
+    },
+    en: {
+      intro: "We give your brand a clear, consistent visual personality, starting with the name and logo and extending to every place your customers see you.",
+      items: ["Brand naming, if you still need a name", "Logo design in every version: primary, icon, black and white", "Official color palette and typography", "Brand guidelines", "Identity applications: business cards, stationery, signage, packaging and social media templates"],
+      deliver: "Source files ready for print and digital: AI, PDF, PNG, SVG.",
+      time: "Two to four weeks depending on scope."
+    }
+  },
+  software: {
+    ar: {
+      intro: "نصمم ونبني الموقع أو التطبيق أو السيستم اللي محتاجه، بنفس هوية البراند، وبشكل سريع وسهل الاستخدام على الموبايل والكمبيوتر.",
+      items: ["مواقع تعريفية للشركات والأشخاص", "متاجر إلكترونية بالدفع والشحن", "تطبيقات موبايل لأندرويد و iOS", "أنظمة إدارة داخلية ولوحات تحكم", "ربط الموقع بنماذج الطلب والحجز والدفع وGoogle Sheets"],
+      deliver: "موقع أو تطبيق شغال على دومين باسمك، مع تدريب بسيط على إدارته.",
+      time: "من أسبوعين لموقع تعريفي، وأكتر للمتاجر والتطبيقات حسب المطلوب."
+    },
+    en: {
+      intro: "We design and build the website, app or system you need, in your brand identity, fast and easy to use on mobile and desktop.",
+      items: ["Company and personal websites", "Online stores with payments and shipping", "Mobile apps for Android and iOS", "Internal management systems and dashboards", "Integrations with order, booking and payment forms and Google Sheets"],
+      deliver: "A live website or app on your own domain, with a short handover on managing it.",
+      time: "About two weeks for a company website, longer for stores and apps depending on scope."
+    }
+  },
+  motion: {
+    ar: {
+      intro: "نحوّل فكرتك أو منتجك لفيديو متحرك بسيط وجذاب، يشرح ويقنع في ثواني.",
+      items: ["فيديوهات إكسبلينر لشرح المنتج أو الخدمة", "لوجو أنيميشن", "ريلز وإعلانات متحركة للسوشيال ميديا", "إنفوجرافيك متحرك", "كتابة السكريبت والفويس أوفر لو محتاج"],
+      deliver: "فيديو نهائي بالمقاسات اللي محتاجها: عرضي للموقع ويوتيوب، وطولي للريلز والستوريز.",
+      time: "من أسبوع لـ 3 أسابيع حسب مدة الفيديو."
+    },
+    en: {
+      intro: "We turn your idea or product into a simple, engaging animated video that explains and convinces in seconds.",
+      items: ["Explainer videos for your product or service", "Logo animation", "Animated reels and ads for social media", "Motion infographics", "Script writing and voice-over if needed"],
+      deliver: "Final video in every size you need: landscape for web and YouTube, vertical for reels and stories.",
+      time: "One to three weeks depending on length."
+    }
+  },
+  edit: {
+    ar: {
+      intro: "مونتاج احترافي بإيقاع يشد المشاهد من أول ثانية لآخر ثانية، لصناع المحتوى والبراندات.",
+      items: ["مونتاج فيديوهات يوتيوب الطويلة", "ريلز وشورتس وتيك توك", "إعلانات الفيديو", "تلوين الصورة وتنضيف الصوت", "ترجمة وإضافة سب تايتل"],
+      deliver: "فيديو جاهز للنشر بالجودة والمقاس المناسب لكل منصة.",
+      time: "من يوم لـ 5 أيام حسب طول الفيديو."
+    },
+    en: {
+      intro: "Professional editing with a rhythm that holds viewers from the first second to the last, for creators and brands.",
+      items: ["Long-form YouTube video editing", "Reels, Shorts and TikToks", "Video ads", "Color grading and audio cleanup", "Translation and subtitles"],
+      deliver: "A publish-ready video in the right quality and format for each platform.",
+      time: "One to five days depending on length."
+    }
+  },
+  social: {
+    ar: {
+      intro: "نخطط وننفذ محتوى السوشيال ميديا بهوية ثابتة، وندير صفحاتك عشان تفضل حاضر قدام جمهورك كل يوم.",
+      items: ["خطة محتوى شهرية", "تصميم البوستات والكاروسيل والستوريز", "كتابة المحتوى", "إدارة الصفحات والنشر والرد على الرسايل", "تقرير شهري بالأداء"],
+      deliver: "تصميمات جاهزة للنشر كل شهر، أو إدارة كاملة للصفحات.",
+      time: "اشتراك شهري، والتصميمات بتتسلم حسب جدول النشر."
+    },
+    en: {
+      intro: "We plan and produce social media content with a consistent identity, and manage your pages so you stay present for your audience every day.",
+      items: ["Monthly content plan", "Post, carousel and story design", "Copywriting", "Page management, publishing and replying to messages", "Monthly performance report"],
+      deliver: "Ready-to-publish designs every month, or full page management.",
+      time: "Monthly plan, with designs delivered on the publishing schedule."
+    }
+  },
+  ads: {
+    ar: {
+      intro: "إدارة الإعلانات الممولة (Media Buying) بهدف واضح: مبيعات أو رسايل أو انتشار، بميزانية محسوبة ونتايج بتتقاس.",
+      items: ["تحديد الجمهور والهدف من الحملة", "تصميم كرييتيف الإعلانات (صور وفيديو)", "إعداد وإدارة الحملات على Meta و TikTok و Google", "متابعة يومية واختبار وتحسين النتائج", "تقارير بالأرقام: الوصول، والرسايل، والمبيعات، وتكلفة النتيجة"],
+      deliver: "حملات شغالة ومتابعة، وتقرير واضح بالنتايج.",
+      time: "أول حملة بتبدأ خلال أيام من الاتفاق، والإدارة بتبقى شهرية."
+    },
+    en: {
+      intro: "Paid ads management (media buying) with a clear goal, whether sales, messages or reach, on a measured budget with measurable results.",
+      items: ["Defining the audience and campaign goal", "Ad creatives (images and video)", "Setting up and managing campaigns on Meta, TikTok and Google", "Daily monitoring, testing and optimization", "Reports with the numbers: reach, messages, sales and cost per result"],
+      deliver: "Live, monitored campaigns and a clear results report.",
+      time: "The first campaign starts within days, with monthly management after that."
+    }
+  }
+};

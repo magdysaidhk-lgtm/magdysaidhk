@@ -170,6 +170,69 @@
     $("#modalBody").scrollTop = 0;
   }
 
+  // صفحة تفاصيل الخدمة: الشرح + أعمال من نفس المجال + زرار طلب
+  function openService(key) {
+    const d = window.SERVICES[key][lang];
+    const titleKey = { identity: "svc.identity.t", software: "svc.software.t", motion: "svc.motion.t", edit: "svc.edit.t", social: "svc.social.t", ads: "svc.ads.t" }[key];
+    const works = window.WORK.map((w, k) => [w, k]).filter(([w]) => w.category === key);
+    const workHtml = works.length
+      ? `<div class="svc-works">${works.map(([w, k]) => {
+          const s = slidesOf(w)[0];
+          const img = s.type === "img" ? s.src : `https://i.ytimg.com/vi/${s.id}/hqdefault.jpg`;
+          return `<button class="svc-work" data-proj="${k}">
+            <img src="${img}" alt="" loading="lazy">
+            <span><strong>${w[lang]}</strong>${w.about ? `<small>${w.about[lang]}</small>` : ""}</span></button>`;
+        }).join("")}</div>`
+      : `<p class="muted">${t("svc.d.nowork")}</p>`;
+    modal.classList.add("modal--case");
+    $("#modalBody").innerHTML = `
+      <article class="case svc-detail">
+        <header class="case__head">
+          <p class="kicker">${t("svc.kicker")}</p>
+          <h2>${t(titleKey)}</h2>
+          <p>${d.intro}</p>
+        </header>
+        <div class="svc-cols">
+          <section><h3>${t("svc.d.includes")}</h3><ul class="checklist">${d.items.map((x) => `<li>${x}</li>`).join("")}</ul></section>
+          <section><h3>${t("svc.d.deliver")}</h3><p>${d.deliver}</p><h3>${t("svc.d.time")}</h3><p>${d.time}</p></section>
+        </div>
+        <section><h3>${t("svc.d.work")}</h3>${workHtml}</section>
+        <div class="svc-cta">
+          <button class="btn btn--dark" data-order="${key}">${t("svc.d.cta")}</button>
+          <a class="btn btn--ghost" href="${C.bookingUrl}" target="_blank" rel="noopener">${t("contact.meet")}</a>
+        </div>
+      </article>`;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    $("#modalBody").scrollTop = 0;
+  }
+  function openProject(k) {
+    const w = window.WORK[k];
+    if (w.caseStudy) { openCase(w); return; }
+    modal.classList.remove("modal--case");
+    gallery = { slides: slidesOf(w).map((s) => ({ ...s, w })), at: 0 };
+    showSlide();
+  }
+  $(".services").addEventListener("click", (e) => {
+    const c = e.target.closest(".service[data-svc]");
+    if (c) openService(c.dataset.svc);
+  });
+  $(".services").addEventListener("keydown", (e) => {
+    const c = e.target.closest(".service[data-svc]");
+    if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openService(c.dataset.svc); }
+  });
+  $("#modalBody").addEventListener("click", (e) => {
+    const w = e.target.closest(".svc-work");
+    if (w) { openProject(+w.dataset.proj); return; }
+    const o = e.target.closest("[data-order]");
+    if (o) {
+      closeModal();
+      const box = document.querySelector(`#orderForm input[name="services"][value="${o.dataset.order}"]`);
+      if (box && !box.checked) { box.checked = true; box.dispatchEvent(new Event("change")); }
+      $("#order").scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
   function openWork(i) {
     if (tiles[i].type === "case") { openCase(tiles[i].w); return; }
     const visible = $$("#workGrid .card:not([hidden])").map((c) => +c.dataset.i).filter((k) => tiles[k].type !== "case");
