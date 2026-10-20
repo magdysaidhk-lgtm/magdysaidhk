@@ -174,15 +174,23 @@
   function openService(key) {
     const d = window.SERVICES[key][lang];
     const titleKey = { identity: "svc.identity.t", software: "svc.software.t", motion: "svc.motion.t", edit: "svc.edit.t", social: "svc.social.t", ads: "svc.ads.t" }[key];
-    const works = window.WORK.map((w, k) => [w, k]).filter(([w]) => w.category === key);
-    const workHtml = works.length
-      ? `<div class="svc-works">${works.map(([w, k]) => {
+    // الهوية: كارت لكل براند بوصفه. باقي الخدمات: كل شغلانة لوحدها في شبكة صغيرة
+    const works = window.WORK.map((w, k) => [w, k]).filter(([w]) => w.category === key && w.caseStudy);
+    const pieces = tiles.map((tl, i) => [tl, i]).filter(([tl]) => tl.w.category === key && tl.type !== "case");
+    const piecesHtml = pieces.length
+      ? `<div class="svc-pieces">${pieces.map(([tl, i]) => `
+          <button class="svc-piece" data-tile="${i}" aria-label="${tl.w[lang]}">
+            <img src="${tl.type === "yt" ? `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg` : tl.src}" alt="" loading="lazy">
+            ${tl.type === "yt" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}</button>`).join("")}</div>`
+      : "";
+    const workHtml = works.length || pieces.length
+      ? piecesHtml + (works.length ? `<div class="svc-works">${works.map(([w, k]) => {
           const s = slidesOf(w)[0];
           const img = s.type === "img" ? s.src : `https://i.ytimg.com/vi/${s.id}/hqdefault.jpg`;
           return `<button class="svc-work" data-proj="${k}">
             <img src="${img}" alt="" loading="lazy">
             <span><strong>${w[lang]}</strong>${w.about ? `<small>${w.about[lang]}</small>` : ""}</span></button>`;
-        }).join("")}</div>`
+        }).join("")}</div>` : "")
       : `<p class="muted">${t("svc.d.nowork")}</p>`;
     modal.classList.add("modal--case");
     $("#modalBody").innerHTML = `
@@ -224,6 +232,15 @@
   $("#modalBody").addEventListener("click", (e) => {
     const w = e.target.closest(".svc-work");
     if (w) { openProject(+w.dataset.proj); return; }
+    const pc = e.target.closest(".svc-piece");
+    if (pc) {
+      // المعرض بيقلّب على شغل الخدمة دي بس
+      const ids = $$(".svc-piece").map((b) => +b.dataset.tile);
+      modal.classList.remove("modal--case");
+      gallery = { slides: ids.map((k) => tiles[k]), at: ids.indexOf(+pc.dataset.tile) };
+      showSlide();
+      return;
+    }
     const o = e.target.closest("[data-order]");
     if (o) {
       closeModal();
