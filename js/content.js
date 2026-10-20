@@ -13,15 +13,26 @@
    images:   أكتر من صورة لنفس المشروع ["assets/work/a.webp", "assets/work/b.webp"] (بتتفتح كمعرض)
    link:     لينك خارجي (Behance مثلاً) لو مش فيديو
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
+// لوحات عرض الهوية: اللوجو، الموكب، اللوجو على لون البراند، الألوان
+function brandBoards(key, mockAr, mockEn) {
+  const f = (n, ar, en) => ({ src: `assets/work/${key}-${n}.webp`, ar, en });
+  return [
+    f(1, "اللوجو الأساسي", "Primary logo"),
+    f(4, mockAr, mockEn),
+    f(2, "اللوجو على لون البراند", "Logo on brand color"),
+    f(3, "ألوان البراند", "Brand colors")
+  ];
+}
+
 window.WORK = [
-  { category: "identity", ar: "هوية أكاديمية النور", en: "Al Noor Academy Identity",
-    images: [1, 2, 3].map((n) => `assets/work/alnoor-${n}.webp`) },
-  { category: "identity", ar: "هوية أكاديمية Bridges", en: "Bridges Academy Identity",
-    images: [1, 2, 3].map((n) => `assets/work/bridges-${n}.webp`) },
-  { category: "identity", ar: "هوية SA7AB", en: "SA7AB Identity",
-    images: [1, 2, 3].map((n) => `assets/work/sa7ab-${n}.webp`) },
-  { category: "identity", ar: "هوية المتحدة ستيل", en: "United Steel Identity",
-    images: [1, 2, 3].map((n) => `assets/work/unitedsteel-${n}.webp`) },
+  { category: "identity", caseStudy: true, ar: "أكاديمية النور", en: "Al Noor Academy",
+    colors: ["#1A4056", "#DCA227"], images: brandBoards("alnoor", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
+  { category: "identity", caseStudy: true, ar: "أكاديمية Bridges", en: "Bridges Academy",
+    colors: ["#004F2B", "#FE5119"], images: brandBoards("bridges", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
+  { category: "identity", caseStudy: true, ar: "SA7AB", en: "SA7AB",
+    colors: ["#161B45", "#D4F5FF"], images: brandBoards("sa7ab", "تطبيق الهوية على الموقع والتطبيق", "Identity applied to website and app") },
+  { category: "identity", caseStudy: true, ar: "المتحدة ستيل", en: "United Steel",
+    colors: ["#000000", "#065F73", "#303030"], images: brandBoards("unitedsteel", "اللوجو في موقع العمل", "Logo on site") },
   { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
     videos: ["NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
   { category: "edit", ar: "مونتاج فيديوهات يوتيوب", en: "YouTube Video Editing",

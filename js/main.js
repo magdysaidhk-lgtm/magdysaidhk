@@ -51,15 +51,18 @@
   function renderContent() {
     // الأعمال
     // كل صورة/فيديو بيتعرض لوحده في الشبكة، ومعاه اسم المشروع
-    tiles = window.WORK.flatMap((w) => slidesOf(w).map((sl) => ({ ...sl, w })));
+    // مشاريع الهوية (caseStudy) بتظهر ككارت واحد بيفتح عرض كامل للبراند
+    tiles = window.WORK.flatMap((w) => w.caseStudy
+      ? [{ type: "case", src: slidesOf(w)[0].src, w }]
+      : slidesOf(w).map((sl) => ({ ...sl, w })));
     const order = window.WORK_ORDER || [];
     const rank = (tl) => { const r = order.indexOf(tl.src || tl.id); return r < 0 ? order.length : r; };
     tiles = tiles.map((tl, k) => [tl, k]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(([tl]) => tl);
     $("#workGrid").innerHTML = tiles.map((tl, i) => {
-      const thumb = tl.type === "img" ? tl.src : `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg`;
+      const thumb = tl.type === "yt" ? `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg` : tl.src;
       return `
         <article class="card" data-cat="${tl.w.category}" data-i="${i}" tabindex="0" role="button">
-          <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy">${tl.type !== "img" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}</div>
+          <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy">${tl.type === "yt" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${tl.type === "case" ? `<span class="card__count">${lang === "ar" ? "شوف الهوية كاملة" : "View full identity"}</span>` : ""}</div>
           <div class="card__meta">
             <h3>${tl.w[lang]}</h3>
             <span class="tag">${t(CAT_LABEL[tl.w.category])}</span>
@@ -107,7 +110,7 @@
   const modal = $("#modal");
   // كل مشروع بيتحول لقايمة شرائح: صورة أو فيديو YouTube (shorts بتتعرض طولي)
   const slidesOf = (w) => [
-    ...(w.images || (w.image ? [w.image] : [])).map((src) => ({ type: "img", src })),
+    ...(w.images || (w.image ? [w.image] : [])).map((x) => ({ type: "img", src: x.src || x, label: x.src ? x : null })),
     ...(w.youtube ? [w.youtube] : []).concat(w.videos || []).map((id) => ({ type: "yt", id })),
     ...(w.shorts || []).map((id) => ({ type: "yt", id, vertical: true }))
   ];
@@ -138,8 +141,31 @@
   }
 
   // بيفتح المعرض على الشغلانة اللي اتداس عليها، والتقليب بيمشي على الشغل الظاهر في الفلتر الحالي
+  function openCase(w) {
+    const colors = (w.colors || []).map((c) =>
+      `<li><span style="background:${c}"></span><code dir="ltr">${c}</code></li>`).join("");
+    const boards = slidesOf(w).map((s) => `
+      <figure>${s.type === "img" ? `<img src="${s.src}" alt="" loading="lazy">` : ""}
+        ${s.label ? `<figcaption>${s.label[lang]}</figcaption>` : ""}</figure>`).join("");
+    modal.classList.add("modal--case");
+    $("#modalBody").innerHTML = `
+      <article class="case">
+        <header class="case__head">
+          <p class="kicker">${t(CAT_LABEL[w.category])}</p>
+          <h2>${w[lang]}</h2>
+          ${w.about ? `<p>${w.about[lang]}</p>` : ""}
+          ${colors ? `<ul class="case__colors">${colors}</ul>` : ""}
+        </header>
+        ${boards}
+      </article>`;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    $("#modalBody").scrollTop = 0;
+  }
+
   function openWork(i) {
-    const visible = $$("#workGrid .card:not([hidden])").map((c) => +c.dataset.i);
+    if (tiles[i].type === "case") { openCase(tiles[i].w); return; }
+    const visible = $$("#workGrid .card:not([hidden])").map((c) => +c.dataset.i).filter((k) => tiles[k].type !== "case");
     const slides = visible.map((k) => tiles[k]);
     gallery = { slides, at: Math.max(0, visible.indexOf(i)), title: "" };
     showSlide();
@@ -148,7 +174,7 @@
   }
   function closeModal() {
     modal.hidden = true;
-    modal.classList.remove("modal--image", "modal--vertical");
+    modal.classList.remove("modal--image", "modal--vertical", "modal--case");
     gallery = null;
     $("#modalBody").innerHTML = "";
     document.body.style.overflow = "";

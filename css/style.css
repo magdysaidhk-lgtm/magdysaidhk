@@ -407,8 +407,20 @@ html[dir="rtl"] .modal__nav--next { right: auto; left: 10px; }
 .modal__counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(7,8,21,.75); color: var(--white); font-size: 13px; padding: 5px 12px; border-radius: 999px; }
 .modal--vertical .modal__body { position: relative; aspect-ratio: 9 / 16; width: auto; height: min(88vh, 900px); max-width: 100%; }
 .modal__body { position: relative; }
+.modal--case .modal__body { aspect-ratio: auto; width: min(980px, 100%); max-height: 92vh; overflow-y: auto; border-radius: 20px; background: var(--soft); overscroll-behavior: contain; }
+.case { display: grid; gap: 16px; padding: 16px; }
+.case__head { padding: 28px 12px 12px; }
+.case__head h2 { font-size: clamp(26px, 4vw, 40px); margin-bottom: 10px; }
+.case__head p { color: var(--navy-700); max-width: 640px; }
+.case__colors { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.case__colors li { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; background: var(--white); border: 1px solid var(--line); border-radius: 999px; }
+.case__colors span { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); }
+.case__colors code { font-size: 13px; color: var(--navy-700); }
+.case figure { margin: 0; }
+.case figure img { width: 100%; border-radius: 14px; display: block; }
+.case figcaption { font-size: 14px; color: var(--muted); padding: 8px 4px 0; }
 .modal__body iframe { width: 100%; height: 100%; border: 0; border-radius: 14px; }
-.modal__close { position: absolute; top: 14px; inset-inline-end: 14px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--white); font-size: 26px; cursor: pointer; }
+.modal__close { position: absolute; z-index: 2; top: 14px; inset-inline-end: 14px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--white); font-size: 26px; cursor: pointer; }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
