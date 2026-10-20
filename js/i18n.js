@@ -71,7 +71,7 @@ window.I18N_EN = {
   "faq.title": "You probably have one of these questions.",
 
   "form.kicker": "Start a project",
-  "form.title": "Tell me exactly what you need. I'll get back to you within 24 hours.",
+  "form.title": "Tell me exactly what you need. I'll get back to you as soon as possible.",
   "form.sub": "The form takes two minutes. Prefer to talk first? Book a call directly.",
   "form.s1": "1. Your details",
   "form.name": "Name",
@@ -155,7 +155,7 @@ window.I18N_EN = {
   "contact.mail": "Email",
 
   "ok.title": "Request received. Thank you!",
-  "ok.sub": "I'll review the details and get back to you within 24 hours. In a hurry? Continue on WhatsApp or book a call.",
+  "ok.sub": "I'll review the details and get back to you as soon as possible. In a hurry? Continue on WhatsApp or book a call.",
   "ok.wa": "Send summary on WhatsApp",
 
   "footer.line": "Identity · Design · Websites & Apps · Motion · Ads",
