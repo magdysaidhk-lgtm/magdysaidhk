@@ -14,6 +14,14 @@
    link:     لينك خارجي (Behance مثلاً) لو مش فيديو
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 window.WORK = [
+  { category: "identity", ar: "هوية أكاديمية النور", en: "Al Noor Academy Identity",
+    images: [1, 2, 3].map((n) => `assets/work/alnoor-${n}.webp`) },
+  { category: "identity", ar: "هوية أكاديمية Bridges", en: "Bridges Academy Identity",
+    images: [1, 2, 3].map((n) => `assets/work/bridges-${n}.webp`) },
+  { category: "identity", ar: "هوية SA7AB", en: "SA7AB Identity",
+    images: [1, 2, 3].map((n) => `assets/work/sa7ab-${n}.webp`) },
+  { category: "identity", ar: "هوية المتحدة ستيل", en: "United Steel Identity",
+    images: [1, 2, 3].map((n) => `assets/work/unitedsteel-${n}.webp`) },
   { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
     videos: ["NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
   { category: "edit", ar: "مونتاج فيديوهات يوتيوب", en: "YouTube Video Editing",
@@ -28,9 +36,11 @@ window.WORK = [
       "assets/work/tawasul-1.webp"
     ] },
   { category: "social", ar: "بوستات طبية", en: "Medical Posts", client: "د/ محمود سيد عبد العال",
-    images: ["assets/work/ent-tonsils.webp", "assets/work/ent-cold.webp"] },
+    images: ["assets/work/ent-tonsils.webp", "assets/work/ent-cold.webp",
+      ...[1, 2, 3, 4, 5].map((n) => `assets/work/peds-${n}.webp`), "assets/work/alfa-1.webp"] },
   { category: "social", ar: "أكاديمية", en: "Academy",
-    images: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/work/bridges-${n}.webp`) }
+    images: [...[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/work/bridges-${n}.webp`),
+      "assets/work/zahra-1.webp", "assets/work/zahra-2.webp"] }
 
 ];
 
