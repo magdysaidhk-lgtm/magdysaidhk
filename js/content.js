@@ -16,6 +16,8 @@
 window.WORK = [
   { category: "motion", ar: "فيديوهات موشن جرافيك", en: "Motion Graphics Videos",
     videos: ["NHrAS-x0Iz8", "E1t4RZC1Ub4", "FyH1JDoziBU"] },
+  { category: "edit", ar: "مونتاج فيديوهات يوتيوب", en: "YouTube Video Editing",
+    videos: ["JKfEMRACG0c", "S5Bfa4_dPv0"] },
   { category: "edit", ar: "ريلز ومونتاج", en: "Reels & Editing",
     shorts: ["iCIRqQOEMnU", "fOY4nkztST4", "GEpZlji3_xU"] },
   { category: "social", ar: "إدارة سوشيال ميديا", en: "Social Media Management",
