@@ -56,13 +56,20 @@
       ? [{ type: "case", src: slidesOf(w)[0].src, w }]
       : slidesOf(w).map((sl) => ({ ...sl, w })));
     const order = window.WORK_ORDER || [];
-    const rank = (tl) => { const r = order.indexOf(tl.src || tl.id); return r < 0 ? order.length : r; };
-    tiles = tiles.map((tl, k) => [tl, k]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(([tl]) => tl);
+    const key = (tl) => tl.src || tl.id;
+    const featured = order.map((k) => tiles.find((tl) => key(tl) === k)).filter(Boolean);
+    // الباقي: واحدة من كل مشروع بالدور، عشان مشروع واحد مايملاش صفوف ورا بعض
+    const groups = window.WORK.map((w) => tiles.filter((tl) => tl.w === w && !featured.includes(tl)));
+    const rest = [];
+    for (let r = 0; groups.some((g) => g[r]); r++) groups.forEach((g) => { if (g[r]) rest.push(g[r]); });
+    tiles = featured.concat(rest);
     $("#workGrid").innerHTML = tiles.map((tl, i) => {
-      const thumb = tl.type === "yt" ? `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg` : tl.src;
+      // صور YouTube من غير الشرايط السودا: hq720 للعرضي و oardefault للـ Shorts، ولو مش موجودة hqdefault
+      const thumb = tl.type === "yt" ? `https://i.ytimg.com/vi/${tl.id}/${tl.vertical ? "oardefault" : "hq720"}.jpg` : tl.src;
+      const fallback = tl.type === "yt" ? ` onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg'"` : "";
       return `
         <article class="card" data-cat="${tl.w.category}" data-i="${i}" tabindex="0" role="button">
-          <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy">${tl.type === "yt" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${tl.type === "case" ? `<span class="card__count">${lang === "ar" ? "شوف الهوية كاملة" : "View full identity"}</span>` : ""}</div>
+          <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy"${fallback}>${tl.type === "yt" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${tl.type === "case" ? `<span class="card__count">${lang === "ar" ? "شوف الهوية كاملة" : "View full identity"}</span>` : ""}</div>
           <div class="card__meta">
             <h3>${tl.w[lang]}</h3>
             <span class="tag">${t(CAT_LABEL[tl.w.category])}</span>

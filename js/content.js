@@ -15,7 +15,7 @@
    لو العنصر مفيهوش youtube/vimeo/image هيظهر كـ "قريباً" */
 // لوحات عرض الهوية: اللوجو، الموكب، اللوجو على لون البراند، الألوان
 function brandBoards(key, mockAr, mockEn) {
-  const f = (n, ar, en) => ({ src: `assets/work/${key}-${n}.webp`, ar, en });
+  const f = (n, ar, en) => ({ src: `assets/work/brand-${key}-${n}.webp`, ar, en });
   return [
     f(1, "اللوجو الأساسي", "Primary logo"),
     f(4, mockAr, mockEn),
@@ -55,7 +55,8 @@ window.WORK = [
 
 ];
 
-/* الترتيب: الشغل ده بيظهر الأول بالترتيب ده (ID الفيديو أو مسار الصورة)، وبعده باقي الشغل */
+/* الترتيب: الشغل ده بيظهر الأول بالترتيب ده (ID الفيديو أو مسار الصورة)،
+   وبعده باقي الشغل متوزع بالتبادل بين المشاريع عشان الألوان تبقى متوازنة */
 window.WORK_ORDER = [
   "GEpZlji3_xU",
   "iCIRqQOEMnU",
@@ -64,7 +65,9 @@ window.WORK_ORDER = [
   "assets/work/lazem-3.webp",
   "assets/work/lazem-2.webp",
   "assets/work/lazem-4.webp",
-  "assets/work/ent-cold.webp"
+  "assets/work/peds-1.webp",
+  "assets/work/peds-2.webp",
+  "assets/work/peds-4.webp"
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

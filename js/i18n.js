@@ -41,7 +41,7 @@ window.I18N_EN = {
   "work.all": "All",
 
   "proc.kicker": "Process",
-  "proc.title": "Four clear steps. No runaround.",
+  "proc.title": "Four clear steps, from idea to delivery.",
   "proc.1.t": "We talk",
   "proc.1.d": "Fill the form or book a call, and I get to know your brand, goal and audience.",
   "proc.2.t": "Plan & proposal",
