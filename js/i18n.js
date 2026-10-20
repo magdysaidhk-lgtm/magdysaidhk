@@ -44,7 +44,7 @@ window.I18N_EN = {
   "svc.full.cta": "Start your brand",
 
   "work.kicker": "Selected work",
-  "work.title": "Work made with care, results you can see.",
+  "work.title": "Work that speaks for itself.",
   "work.all": "All",
   "work.seeall": "See all",
 

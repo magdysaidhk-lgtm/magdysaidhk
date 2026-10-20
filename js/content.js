@@ -59,19 +59,68 @@ window.WORK = [
 
 ];
 
-/* الترتيب: الشغل ده بيظهر الأول بالترتيب ده (ID الفيديو أو مسار الصورة)،
-   وبعده باقي الشغل متوزع بالتبادل بين المشاريع عشان الألوان تبقى متوازنة */
+/* الترتيب في "الكل" (والفلاتر بتمشي على نفس الترتيب): ID الفيديو أو مسار الصورة، كل 4 = صف.
+   أي شغل مش مكتوب هنا بيتحط في الآخر */
 window.WORK_ORDER = [
+  // صف 1: مونتاج وريلز
   "GEpZlji3_xU",
   "iCIRqQOEMnU",
+  "fOY4nkztST4",
+  "JKfEMRACG0c",
+
+  // صف 2: سوشيال ميديا
   "assets/work/tawasul-2.webp",
-  "E1t4RZC1Ub4",
   "assets/work/lazem-3.webp",
   "assets/work/lazem-2.webp",
   "assets/work/lazem-4.webp",
+
+  // صف 3: موشن جرافيك (الرابع مؤقتًا فيديو يوتيوب لحد ما يتضاف فيديو موشن)
+  "E1t4RZC1Ub4",
+  "NHrAS-x0Iz8",
+  "FyH1JDoziBU",
+  "S5Bfa4_dPv0",
+
+  // صف 4: هوية بصرية
+  "assets/work/brand-alnoor-1.webp",
+  "assets/work/brand-bridges-1.webp",
+  "assets/work/brand-sa7ab-1.webp",
+  "assets/work/brand-unitedsteel-1.webp",
+
+  // بعد كده التصميمات متجمعة حسب ألوانها: أزرق ووردي
   "assets/work/peds-1.webp",
   "assets/work/peds-2.webp",
-  "assets/work/peds-4.webp"
+  "assets/work/peds-4.webp",
+  "assets/work/peds-3.webp",
+
+  // أزرق
+  "assets/work/peds-5.webp",
+  "assets/work/ent-cold.webp",
+  "assets/work/ent-tonsils.webp",
+  "assets/work/mazad-1.webp",
+
+  // أزرق بنفسجي
+  "assets/work/alfa-1.webp",
+  "assets/work/tawasul-1.webp",
+  "assets/work/zahra-2.webp",
+  "assets/work/bridges-8.webp",
+
+  // أخضر وتركواز
+  "assets/work/bridges-2.webp",
+  "assets/work/bridges-1.webp",
+  "assets/work/zahra-1.webp",
+  "assets/work/lazem-1.webp",
+
+  // فاتح
+  "assets/work/bridges-3.webp",
+  "assets/work/bridges-4.webp",
+  "assets/work/bridges-6.webp",
+  "assets/work/bridges-7.webp",
+
+  // دافي
+  "assets/work/mazad-2.webp",
+  "assets/work/mazad-3.webp",
+  "assets/work/mazad-4.webp",
+  "assets/work/bridges-5.webp"
 ];
 
 /* الخبرات — عدّل السنين والأماكن */

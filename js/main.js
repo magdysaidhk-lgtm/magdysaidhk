@@ -55,11 +55,9 @@
     tiles = window.WORK.flatMap((w) => w.caseStudy
       ? [{ type: "case", src: slidesOf(w)[0].src, w }]
       : slidesOf(w).map((sl) => ({ ...sl, w })));
-    // جوه كل مشروع: الشغل المختار في WORK_ORDER الأول، والمشاريع بتفضل متجمعة عشان الألوان تبقى متناسقة
     const order = window.WORK_ORDER || [];
     const rank = (tl) => { const r = order.indexOf(tl.src || tl.id); return r < 0 ? order.length : r; };
-    tiles = window.WORK.flatMap((w) => tiles.filter((tl) => tl.w === w).map((tl, k) => [tl, k])
-      .sort((x, y) => rank(x[0]) - rank(y[0]) || x[1] - y[1]).map(([tl]) => tl));
+    tiles = tiles.map((tl, k) => [tl, k]).sort((x, y) => rank(x[0]) - rank(y[0]) || x[1] - y[1]).map(([tl]) => tl);
     renderWork();
     // إخفاء الفلاتر اللي مفيهاش شغل
     $$("#filters .chip").forEach((c) => {
@@ -87,8 +85,6 @@
 
   /* ---------- الأعمال ---------- */
   let filter = "all";
-  const CAT_ORDER = ["identity", "social", "motion", "edit", "software", "ads"];
-  const ROW = 4; // في "الكل" كل مشروع بياخد صف واحد بس
 
   function cardHtml(tl, i) {
     // صور YouTube من غير الشرايط السودا: hq720 للعرضي و oardefault للـ Shorts
@@ -109,40 +105,13 @@
   }
 
   function renderWork() {
-    const idx = (tl) => tiles.indexOf(tl);
-    const cats = CAT_ORDER.filter((c) => (filter === "all" || filter === c) && tiles.some((tl) => tl.w.category === c));
-    $("#workGrid").innerHTML = cats.map((c) => {
-      const inCat = tiles.filter((tl) => tl.w.category === c);
-      const projects = window.WORK.filter((w) => w.category === c);
-      let body;
-      if (c === "identity") {
-        body = `<div class="grid">${inCat.map((tl) => cardHtml(tl, idx(tl))).join("")}</div>`;
-      } else {
-        // كل مشروع في صف لوحده باسمه، وفي "الكل" أول 4 بس
-        body = projects.map((w) => {
-          const list = inCat.filter((tl) => tl.w === w);
-          const shown = filter === "all" ? list.slice(0, ROW) : list;
-          return `<div class="wgroup__proj"><h4>${w[lang]} <span>${list.length}</span></h4>
-            <div class="grid">${shown.map((tl) => cardHtml(tl, idx(tl))).join("")}</div></div>`;
-        }).join("");
-      }
-      const more = filter === "all" && c !== "identity"
-        ? `<button class="wgroup__more" data-goto="${c}">${t("work.seeall")} (${inCat.length})</button>` : "";
-      return `<section class="wgroup">
-        <header class="wgroup__head"><h3>${t(CAT_LABEL[c])}</h3>${more}</header>${body}</section>`;
-    }).join("");
+    const list = tiles.map((tl, i) => [tl, i]).filter(([tl]) => filter === "all" || tl.w.category === filter);
+    $("#workGrid").innerHTML = list.map(([tl, i]) => cardHtml(tl, i)).join("");
   }
   function applyFilter() {
     $$("#filters .chip").forEach((x) => x.classList.toggle("is-active", x.dataset.filter === filter));
     renderWork();
   }
-  $("#workGrid").addEventListener("click", (e) => {
-    const g = e.target.closest("[data-goto]");
-    if (!g) return;
-    filter = g.dataset.goto;
-    applyFilter();
-    $("#work").scrollIntoView({ behavior: "smooth" });
-  });
   $("#filters").addEventListener("click", (e) => {
     const b = e.target.closest(".chip");
     if (!b) return;
