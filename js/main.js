@@ -66,7 +66,11 @@
     $("#workGrid").innerHTML = tiles.map((tl, i) => {
       // صور YouTube من غير الشرايط السودا: hq720 للعرضي و oardefault للـ Shorts، ولو مش موجودة hqdefault
       const thumb = tl.type === "yt" ? `https://i.ytimg.com/vi/${tl.id}/${tl.vertical ? "oardefault" : "hq720"}.jpg` : tl.src;
-      const fallback = tl.type === "yt" ? ` onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg'"` : "";
+      // لو الصورة مش موجودة YouTube بيرجّع صورة رمادي 120×90 مش error، فبنرجع لـ hqdefault
+      const hq = `https://i.ytimg.com/vi/${tl.id}/hqdefault.jpg`;
+      const fallback = tl.type === "yt"
+        ? ` onerror="this.onerror=null;this.src='${hq}'" onload="if(this.naturalWidth<=120&&!this.src.includes('hqdefault'))this.src='${hq}'"`
+        : "";
       return `
         <article class="card" data-cat="${tl.w.category}" data-i="${i}" tabindex="0" role="button">
           <div class="card__media"><img src="${thumb}" alt="${tl.w[lang]}" loading="lazy"${fallback}>${tl.type === "yt" ? '<span class="card__play" aria-hidden="true">▶</span>' : ""}${tl.type === "case" ? `<span class="card__count">${lang === "ar" ? "شوف الهوية كاملة" : "View full identity"}</span>` : ""}</div>
