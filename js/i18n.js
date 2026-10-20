@@ -46,6 +46,7 @@ window.I18N_EN = {
   "work.kicker": "Selected work",
   "work.title": "Work made with care, results you can see.",
   "work.all": "All",
+  "work.seeall": "See all",
 
   "proc.kicker": "Process",
   "proc.title": "Four clear steps, from idea to delivery.",
@@ -166,6 +167,7 @@ window.I18N_EN = {
 
 /* نصوص عربي بيستخدمها الجافاسكريبت */
 window.I18N_AR_JS = {
+  "work.seeall": "شوف الكل",
   "svc.d.includes": "الخدمة بتشمل",
   "svc.d.deliver": "هتستلم إيه",
   "svc.d.time": "المدة التقريبية",
